@@ -1,0 +1,544 @@
+/* ==========================================================================
+   Weather Icon Display - Clean Light Theme Styling
+   Design System: White background with soft pastel blue and green accents
+   ========================================================================== */
+
+:root {
+  /* Core Base Colors (Light Theme) */
+  --bg-page: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --text-subtle: #94a3b8;
+  
+  /* Brand Pastel Accents */
+  --accent-blue: #0284c7;
+  --accent-blue-soft: #e0f2fe;
+  --accent-green: #0d9488;
+  --accent-green-soft: #ccfbf1;
+  --border-light: #e2e8f0;
+  --border-focus: #38bdf8;
+  
+  /* Dynamic Active Condition Theme Variables (Default State) */
+  --theme-accent: #0d9488;
+  --theme-accent-soft: #dcfce7;
+  --theme-border: #cbd5e1;
+  --theme-icon-glow: rgba(13, 148, 136, 0.12);
+  --theme-banner-bg: #f0fdf4;
+  
+  /* Elevation & Borders */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 9999px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --shadow-hover: 0 20px 30px -10px rgba(15, 23, 42, 0.08);
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.28s ease-in-out;
+}
+
+/* ==========================================================================
+   Weather Condition Dynamic Accent Themes
+   ========================================================================== */
+
+/* Sunny: Warm Pastel Amber & Golden Ray Glow */
+body.theme-sunny {
+  --theme-accent: #d97706;
+  --theme-accent-soft: #fef3c7;
+  --theme-border: #fcd34d;
+  --theme-icon-glow: rgba(217, 119, 6, 0.16);
+  --theme-banner-bg: #fffbeb;
+}
+
+/* Cloudy: Soft Cool Slate & Overcast Mist */
+body.theme-cloudy {
+  --theme-accent: #475569;
+  --theme-accent-soft: #f1f5f9;
+  --theme-border: #cbd5e1;
+  --theme-icon-glow: rgba(71, 85, 105, 0.14);
+  --theme-banner-bg: #f8fafc;
+}
+
+/* Rainy: Gentle Cerulean Sky & Fresh Raindrops */
+body.theme-rainy {
+  --theme-accent: #0284c7;
+  --theme-accent-soft: #e0f2fe;
+  --theme-border: #7dd3fc;
+  --theme-icon-glow: rgba(2, 132, 199, 0.16);
+  --theme-banner-bg: #f0f9ff;
+}
+
+/* Stormy: Soft Lavender Violet & Electric Atmosphere */
+body.theme-stormy {
+  --theme-accent: #6d28d9;
+  --theme-accent-soft: #ede9fe;
+  --theme-border: #c4b5fd;
+  --theme-icon-glow: rgba(109, 40, 217, 0.16);
+  --theme-banner-bg: #faf5ff;
+}
+
+/* Snowy: Crisp Icy Mint & Frosted Sky */
+body.theme-snowy {
+  --theme-accent: #0891b2;
+  --theme-accent-soft: #cffafe;
+  --theme-border: #a5f3fc;
+  --theme-icon-glow: rgba(8, 145, 178, 0.16);
+  --theme-banner-bg: #ecfeff;
+}
+
+/* Foggy: Quiet Misty Teal & Sage Hue */
+body.theme-foggy {
+  --theme-accent: #0f766e;
+  --theme-accent-soft: #ccfbf1;
+  --theme-border: #99f6e4;
+  --theme-icon-glow: rgba(15, 118, 110, 0.16);
+  --theme-banner-bg: #f0fdfa;
+}
+
+/* ==========================================================================
+   CSS Reset & Base Rules
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color var(--transition-normal);
+  padding: 1.5rem 1rem;
+}
+
+/* Subtle pastel background ambient overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 15% 10%, var(--accent-blue-soft) 0%, transparent 45%),
+              radial-gradient(circle at 85% 85%, var(--accent-green-soft) 0%, transparent 45%);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity var(--transition-normal);
+}
+
+/* ==========================================================================
+   Layout Containers
+   ========================================================================== */
+
+.page-wrapper {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+/* ==========================================================================
+   Header Section
+   ========================================================================== */
+
+.app-header {
+  text-align: center;
+  padding: 1rem 0 0.5rem;
+}
+
+.badge-pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.85rem;
+  background-color: var(--accent-blue-soft);
+  color: var(--accent-blue);
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(2, 132, 199, 0.2);
+}
+
+.app-title {
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+}
+
+.app-subtitle {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   Controls Card & Select Dropdown
+   ========================================================================== */
+
+.controls-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.control-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.control-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.select-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.weather-select {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-main);
+  background-color: var(--bg-input);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  appearance: none;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.weather-select:hover {
+  border-color: var(--border-focus);
+}
+
+.weather-select:focus {
+  outline: none;
+  border-color: var(--theme-accent);
+  box-shadow: 0 0 0 3px var(--theme-icon-glow);
+}
+
+.select-arrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.btn-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.15rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background-color: #f1f5f9;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-reset:hover {
+  background-color: #e2e8f0;
+  color: var(--text-main);
+}
+
+.btn-reset:active {
+  transform: scale(0.97);
+}
+
+.reset-icon {
+  font-size: 1.05rem;
+}
+
+/* Quick Access Chips */
+.quick-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.25rem;
+  border-top: 1px dashed var(--border-light);
+}
+
+.chips-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-subtle);
+  margin-right: 0.25rem;
+}
+
+.chip-btn {
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.65rem;
+  background-color: #f8fafc;
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.chip-btn:hover {
+  background-color: var(--accent-blue-soft);
+  color: var(--accent-blue);
+  border-color: rgba(2, 132, 199, 0.3);
+}
+
+.chip-btn.active {
+  background-color: var(--theme-accent-soft);
+  color: var(--theme-accent);
+  border-color: var(--theme-border);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Weather Display Card
+   ========================================================================== */
+
+.weather-card {
+  background-color: var(--bg-card);
+  border: 2px solid var(--theme-border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 3.5vw, 2rem);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.weather-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background-color: var(--theme-accent);
+  transition: background-color var(--transition-normal);
+}
+
+/* Card Header Status */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--theme-accent-soft);
+  color: var(--theme-accent);
+  transition: all var(--transition-normal);
+}
+
+.condition-key {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-subtle);
+}
+
+/* Card Visual Icon Container */
+.card-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.icon-wrapper {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--theme-banner-bg) 0%, #ffffff 80%);
+  border: 2px solid var(--theme-accent-soft);
+  box-shadow: 0 0 25px var(--theme-icon-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+/* SVG Icon Styling */
+.weather-svg {
+  width: 72px;
+  height: 72px;
+  transition: transform var(--transition-normal);
+}
+
+.icon-wrapper:hover .weather-svg {
+  transform: scale(1.06);
+}
+
+/* Fallback / Emoji Icon Styling */
+.emoji-icon {
+  font-size: 3.5rem;
+  line-height: 1;
+  display: inline-block;
+  transition: transform var(--transition-normal);
+}
+
+/* Card Text Content */
+.card-content {
+  text-align: center;
+}
+
+.condition-title {
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.condition-description {
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Atmosphere Highlights Grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  background-color: #f8fafc;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.25rem;
+}
+
+.metric-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-subtle);
+}
+
+.metric-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Card Footer & Tip */
+.card-footer {
+  text-align: center;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.status-hint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.status-hint strong {
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.app-footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-subtle);
+  padding: 1rem 0;
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+@media (max-width: 540px) {
+  body {
+    padding: 1rem 0.75rem;
+  }
+  
+  .control-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-reset {
+    justify-content: center;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .icon-wrapper {
+    width: 104px;
+    height: 104px;
+  }
+
+  .weather-svg {
+    width: 60px;
+    height: 60px;
+  }
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A clean, responsive Weather Icon Display application built with HTML5, CSS3, and vanilla JavaScript. Features static atmospheric data, custom SVG icons, and dynamic pastel theme accents.">
+  <title>Weather Icon Display | Static Atmospheric Viewer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-default">
+  <div class="page-wrapper">
+    <header class="app-header">
+      <div class="badge-pill">Static Data Demo</div>
+      <h1 class="app-title">Weather Icon Display</h1>
+      <p class="app-subtitle">Select an atmospheric condition to preview its custom icon, descriptive forecast, and theme styling.</p>
+    </header>
+
+    <main class="app-main">
+      <!-- Selector Control Card -->
+      <section class="controls-card" aria-label="Weather selection controls">
+        <label for="weatherSelect" class="control-label">Choose Weather Condition:</label>
+        <div class="control-row">
+          <div class="select-wrapper">
+            <select id="weatherSelect" class="weather-select" aria-label="Select weather condition">
+              <option value="" selected disabled>-- Select a condition --</option>
+              <option value="sunny">Sunny</option>
+              <option value="cloudy">Cloudy</option>
+              <option value="rainy">Rainy</option>
+              <option value="stormy">Stormy</option>
+              <option value="snowy">Snowy</option>
+              <option value="foggy">Foggy</option>
+            </select>
+            <span class="select-arrow" aria-hidden="true">&#9662;</span>
+          </div>
+          <button id="resetBtn" type="button" class="btn-reset" title="Reset to default friendly state">
+            <span class="reset-icon" aria-hidden="true">&#8635;</span> Reset
+          </button>
+        </div>
+
+        <!-- Quick Access Filter Pills -->
+        <div class="quick-chips" aria-label="Quick weather selection buttons">
+          <span class="chips-label">Quick select:</span>
+          <button type="button" class="chip-btn" data-weather="sunny">☀️ Sunny</button>
+          <button type="button" class="chip-btn" data-weather="cloudy">☁️ Cloudy</button>
+          <button type="button" class="chip-btn" data-weather="rainy">🌧️ Rainy</button>
+          <button type="button" class="chip-btn" data-weather="stormy">⛈️ Stormy</button>
+          <button type="button" class="chip-btn" data-weather="snowy">❄️ Snowy</button>
+          <button type="button" class="chip-btn" data-weather="foggy">🌫️ Foggy</button>
+        </div>
+      </section>
+
+      <!-- Weather Display Card -->
+      <section id="weatherCard" class="weather-card is-default" aria-live="polite">
+        <div class="card-header">
+          <span id="conditionBadge" class="status-badge">Default State</span>
+          <span id="conditionKey" class="condition-key">Awaiting Input</span>
+        </div>
+
+        <div class="card-visual">
+          <div id="iconWrapper" class="icon-wrapper" aria-hidden="true">
+            <!-- Icon injected via JavaScript -->
+          </div>
+        </div>
+
+        <div class="card-content">
+          <h2 id="conditionTitle" class="condition-title">Welcome to Weather Display</h2>
+          <p id="conditionDescription" class="condition-description">
+            Choose any weather condition from the dropdown list above to explore its matching icon, atmospheric summary, and ambient color accent.
+          </p>
+        </div>
+
+        <!-- Atmosphere Highlights Grid -->
+        <div class="metrics-grid">
+          <div class="metric-item">
+            <span class="metric-label">Temperature</span>
+            <strong id="metricTemp" class="metric-value">--</strong>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Atmosphere</span>
+            <strong id="metricAtmosphere" class="metric-value">Pending</strong>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Humidity</span>
+            <strong id="metricHumidity" class="metric-value">--</strong>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Wind</span>
+            <strong id="metricWind" class="metric-value">--</strong>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <p id="statusHint" class="status-hint">
+            💡 <strong>Tip:</strong> Selecting conditions will smoothly adapt the card's accent highlights and soft background tints.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Weather Icon Display &bull; Static Atmospheric Showcase &bull; HTML5 &bull; CSS3 &bull; Vanilla JavaScript</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
