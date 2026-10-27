@@ -288,49 +288,6 @@ body::before {
   font-size: 1.05rem;
 }
 
-/* Quick Access Chips */
-.quick-chips {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  padding-top: 0.25rem;
-  border-top: 1px dashed var(--border-light);
-}
-
-.chips-label {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-subtle);
-  margin-right: 0.25rem;
-}
-
-.chip-btn {
-  font-family: inherit;
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 0.35rem 0.65rem;
-  background-color: #f8fafc;
-  color: var(--text-muted);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.chip-btn:hover {
-  background-color: var(--accent-blue-soft);
-  color: var(--accent-blue);
-  border-color: rgba(2, 132, 199, 0.3);
-}
-
-.chip-btn.active {
-  background-color: var(--theme-accent-soft);
-  color: var(--theme-accent);
-  border-color: var(--theme-border);
-  font-weight: 600;
-}
-
 /* ==========================================================================
    Weather Display Card
    ========================================================================== */

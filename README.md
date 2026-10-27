@@ -20,9 +20,7 @@ A clean, modern, and responsive atmospheric weather condition viewer engineered 
 6. **Responsive Light-Theme Design**:
    - Modern light theme on a clean white background with soft pastel blue and green accents.
    - Fluid typography (`clamp()`), rounded corners, touch-friendly interactive targets (min 44px), and adaptive grid metrics for mobile, tablet, and desktop screens.
-7. **Quick-Select Chips**:
-   - Accessible quick-access chips providing one-click switching synchronized with the dropdown.
-8. **Zero External Image Dependencies**:
+7. **Zero External Image Dependencies**:
    - Pure inline vector SVGs ensuring zero broken links, instant rendering, and offline compatibility.
 
 ---
@@ -69,7 +67,7 @@ const weatherConditions = {
 
 ### Event Handling & DOM Updates
 - **`change` Event**: Listens to `<select id="weatherSelect">` selections and passes the condition key to `updateWeatherDisplay()`.
-- **`click` Event**: Fast quick-select chips allow rapid testing and previewing across devices.
+- **`click` Event**: Reset button restores the friendly default state with a single click.
 - **Theme Class Switching**: The controller swaps body classes (`theme-sunny`, `theme-rainy`, etc.), allowing CSS variables to seamlessly update accent borders, icon glow, and badge backgrounds.
 
 ---
@@ -88,7 +86,7 @@ const weatherConditions = {
      # or using Python:
      python -m http.server 8000
      ```
-3. Select any weather condition from the dropdown or click a quick-select chip to preview dynamic updates.
+3. Select any weather condition from the dropdown to preview dynamic updates.
 
 ---
 

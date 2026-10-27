@@ -232,7 +232,6 @@ const metricAtmosphere = document.getElementById('metricAtmosphere');
 const metricHumidity = document.getElementById('metricHumidity');
 const metricWind = document.getElementById('metricWind');
 const statusHint = document.getElementById('statusHint');
-const chipButtons = document.querySelectorAll('.chip-btn');
 
 // All theme class names for easy cleanup
 const allThemeClasses = [
@@ -294,15 +293,6 @@ function updateWeatherDisplay(conditionKeyString) {
   } else {
     weatherSelect.value = conditionKeyString;
   }
-
-  // 9. Sync Quick Filter Chip States
-  chipButtons.forEach((btn) => {
-    if (!isDefault && btn.getAttribute('data-weather') === conditionKeyString) {
-      btn.classList.add('active');
-    } else {
-      btn.classList.remove('active');
-    }
-  });
 }
 
 // ==========================================================================
@@ -318,14 +308,6 @@ weatherSelect.addEventListener('change', (event) => {
 // Reset Button Click Event
 resetBtn.addEventListener('click', () => {
   updateWeatherDisplay("");
-});
-
-// Quick Select Chip Buttons
-chipButtons.forEach((chip) => {
-  chip.addEventListener('click', () => {
-    const weather = chip.getAttribute('data-weather');
-    updateWeatherDisplay(weather);
-  });
 });
 
 // Keyboard Accessibility: pressing 'Escape' resets to default state
